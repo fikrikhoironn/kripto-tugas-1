@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <div className="bg-black flex flex-col justify-center items-center h-screen gap-6">
-        <div className="text-4xl font-extrabold text-blue-600">Enkripsi</div>
+        <div className="text-4xl font-extrabold text-blue-600">Dekripsi</div>
         <div className="flex flex-col justify-center items-center">
           <div className="dropdown inline-block relative">
             <button
@@ -88,7 +88,7 @@ export default function Home() {
         <div className="flex flex-col justify-center items-center">
           <label
             htmlFor="key"
-            className="block text-white text-sm font-medium mb-2 "
+            className="block text-white text-sm font-medium mb-2 o"
           >
             Enter Key
           </label>
@@ -122,16 +122,16 @@ export default function Home() {
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             type="button"
           >
-            Enkripsi{" "}
+            Dekripsi{" "}
           </button>
         </div>
         <div className="flex flex-row gap-8 w-screen justify-center">
           <div>
-            <div className="text-white mb-2 font-medium">Plaintext</div>
+            <div className="text-white mb-2 font-medium">Ciphertext</div>
             <div className="relative bg-white w-[500px] h-[400px] rounded-lg shadow overflow-y-auto text-[12px] font-helvetica"></div>
           </div>
           <div>
-            <div className="text-white mb-2 font-medium">Ciphertext</div>
+            <div className="text-white mb-2 font-medium">Plaintext</div>
             <div className="relative bg-white w-[500px] h-[400px] rounded-lg shadow overflow-y-auto text-[12px] font-helvetica"></div>
           </div>
         </div>
@@ -140,7 +140,7 @@ export default function Home() {
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             type="button"
           >
-            Download Ciphertext
+            Download Plaintext
           </button>
         </div>
       </div>
