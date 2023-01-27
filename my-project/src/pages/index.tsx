@@ -2,10 +2,26 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
+import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
+const algorithms = [
+  { id: 1, label: "Vigenere Cipher standard" },
+  { id: 2, label: "Varian Vigenere Cipher" },
+  { id: 3, label: "Extended Vigenere Cipher" },
+  { id: 4, label: "Affine Cipher" },
+  { id: 5, label: "Playfair Cipher" },
+  { id: 6, label: "Hill Cipher" },
+];
 
 export default function Home() {
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [key, setKey] = useState("");
+
+  const handleItemClick = (id: any) => {
+    setSelectedItem(id);
+    console.log(selectedItem);
+  };
   return (
     <>
       <div className="bg-black flex flex-col justify-center items-center h-screen gap-6">
@@ -16,7 +32,7 @@ export default function Home() {
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               type="button"
             >
-              Algorithms{" "}
+              {selectedItem ? algorithms[selectedItem].label : "Algorithms"}{" "}
               <svg
                 className="w-4 h-4 ml-2"
                 aria-hidden="true"
@@ -34,54 +50,17 @@ export default function Home() {
               </svg>
             </button>
             <ul className="dropdown-menu absolute hidden text-gray-200 pt-2">
-              <li className="">
-                <a
-                  className="rounded-t bg-gray-700 py-2 px-4 block whitespace-no-wrap text-[12px] hover:bg-gray-400 hover:text-white "
-                  href="#"
-                >
-                  Vigenere Cipher
-                </a>
-              </li>
-              <li className="">
-                <a
-                  className=" bg-gray-700 py-2 px-4 block whitespace-no-wrap text-[12px] hover:bg-gray-400 hover:text-white "
-                  href="#"
-                >
-                  Varian Vigenere Cipher
-                </a>
-              </li>
-              <li className="">
-                <a
-                  className=" bg-gray-700 py-2 px-4 block whitespace-no-wrap text-[12px] hover:bg-gray-400 hover:text-white "
-                  href="#"
-                >
-                  Extended Vigenere Cipher
-                </a>
-              </li>
-              <li className="">
-                <a
-                  className=" bg-gray-700 py-2 px-4 block whitespace-no-wrap text-[12px] hover:bg-gray-400 hover:text-white "
-                  href="#"
-                >
-                  Affine Cipher
-                </a>
-              </li>
-              <li className="">
-                <a
-                  className=" bg-gray-700 py-2 px-4 block whitespace-no-wrap text-[12px] hover:bg-gray-400 hover:text-white "
-                  href="#"
-                >
-                  Playfair Cipher
-                </a>
-              </li>
-              <li className="">
-                <a
-                  className="rounded-b bg-gray-700 py-2 px-4 block whitespace-no-wrap text-[12px] hover:bg-gray-400 hover:text-white "
-                  href="#"
-                >
-                  Hill Cipher
-                </a>
-              </li>
+              {algorithms.map((algorithm) => (
+                // eslint-disable-next-line react/jsx-key
+                <li className="">
+                  <a
+                    className="rounded-t bg-gray-700 py-2 px-4 block whitespace-no-wrap text-[12px] hover:bg-gray-400 hover:text-white "
+                    onClick={(e) => handleItemClick(algorithm.id)}
+                  >
+                    {algorithm.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -99,7 +78,11 @@ export default function Home() {
               cols="60"
               rows="5"
               className="overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
+              onKeyUp={(e) => {
+                setKey(e.target.value);
+              }}
             ></textarea>
+            {console.log(key)}
           </form>
         </div>
         <div className="">
