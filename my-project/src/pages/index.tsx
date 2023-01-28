@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
-import { useState } from "react";
+import React, { useState } from "react";
 import ButtonText from "@/components/button";
 import Navbar from "@/components/navbar";
 
@@ -26,9 +26,11 @@ export default function Home() {
   };
   return (
     <>
-      <div className="bg-black flex flex-col justify-center items-center h-screen gap-6">
-        <Navbar />
-        <div className="text-4xl font-extrabold text-blue-600">Enkripsi</div>
+      <div className="bg-black flex flex-col justify-center items-center h-full gap-6">
+        <div className="fixed top-0">
+          <Navbar />
+        </div>
+        <div className="text-4xl font-extrabold text-blue-600 mt-24">Enkripsi</div>
         <div className="flex flex-col justify-center items-center">
           <div className="dropdown inline-block relative">
             <button
@@ -78,12 +80,10 @@ export default function Home() {
             <textarea
               name="key"
               id="key"
-              cols="60"
-              rows="5"
+              cols={60}
+              rows={5}
               className="overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
-              onKeyUp={(e) => {
-                setKey(e.target.value);
-              }}
+              onKeyUp={(e) => setKey(e.currentTarget.value)}
             ></textarea>
             {console.log(key)}
           </form>
@@ -116,7 +116,7 @@ export default function Home() {
             <div className="relative bg-white w-[500px] h-[400px] rounded-lg shadow overflow-y-auto text-[12px] font-helvetica"></div>
           </div>
         </div>
-        <div>
+        <div className="pb-14">
           <ButtonText text={"Download Ciphertext"}></ButtonText>
         </div>
       </div>
