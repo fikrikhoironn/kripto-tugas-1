@@ -50,14 +50,14 @@ function VigenereCipherDecrypt (ciphertext, key){
         var charCode = ciphertext.charCodeAt(i);
         if (charCode >= 65 && charCode <= 90){
             plaintext += String.fromCharCode((charCode - 65 - key.charCodeAt(keyIndex) + 65 + 26) % 26 + 65);
-            keyIndex = (keyIndex + 1) % key.length;
-        }
-        else if (charCode >= 97 && charCode <= 122){
-            plaintext += String.fromCharCode((charCode - 97 - key.charCodeAt(keyIndex) + 97 + 26) % 26 + 97);
+            console.log("plaintext: " + plaintext);
             keyIndex = (keyIndex + 1) % key.length;
         }
         else {
             plaintext += ciphertext[i];
+        }
+        if (key.length < ciphertext.length){
+            key += plaintext[i];
         }
     }
     // divide plaintext into 5 characters
@@ -70,10 +70,7 @@ function autoKeyVigenereCipherDecrypt (ciphertext, key) {
     ciphertext = ciphertext.replace(/\s/g, "");
     // santize key delete spaces
     let plaintext = "";
-    if (ciphertext.length > key.length) {
-        key = key + ciphertext.substring(0, ciphertext.length - key.length);
-    }
-    console.log(key);
+    console.log ("key: " + key);
     plaintext = VigenereCipherDecrypt(ciphertext, key);
     return plaintext;
 }
@@ -86,10 +83,10 @@ function main(){
 
     let ciphertext;
     ciphertext = autoKeyVigenereCipherEncrypt(plaintext, key);
-    console.log(ciphertext);
+    console.log("ciphertext: " + ciphertext);
 
-    plaintextBaru = autoKeyVigenereCipherDecrypt(ciphertext, key);
-    console.log(plaintextBaru);
+    let plaintextBaru = autoKeyVigenereCipherDecrypt(ciphertext, key);
+    console.log("plaintext: "+ plaintextBaru);
 }
 
 main();
