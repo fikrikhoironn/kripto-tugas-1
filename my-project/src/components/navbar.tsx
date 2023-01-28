@@ -2,13 +2,14 @@
 
 import React from 'react';
 import clsx from 'clsx';
+
 interface NavbarProps {
     text?: string;
     onClick?: () => void;
 }
 
 
-const Navbar: React.FC<NavbarProps> = ({ text, onClick }) => {
+const Navbar: React.FC<NavbarProps> = ({text, onClick}) => {
     // @ts-ignore
     return (
         <>
@@ -16,7 +17,7 @@ const Navbar: React.FC<NavbarProps> = ({ text, onClick }) => {
 
                 <nav className="w-screen bg-white border-gray-200 px-2 sm:px-4 rounded dark:bg-gray-900">
                     <div className="container flex flex-wrap items-center justify-between mx-auto pt-0">
-                        <a href="https://flowbite.com/" className="flex items-center">
+                        <a href="/" className="flex items-center">
                             <img src="https://flowbite.com/docs/images/logo.svg" className="h-6 mr-3 sm:h-9"
                                  alt="Flowbite Logo"/>
                             <span
@@ -42,15 +43,18 @@ const Navbar: React.FC<NavbarProps> = ({ text, onClick }) => {
                                 </li>
                                 <li>
                                     <a href="#"
-                                       className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Encrypt Text</a>
+                                       className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Encrypt
+                                        Text</a>
                                 </li>
                                 <li>
                                     <a href="/decrypt"
-                                       className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Decrypt File</a>
+                                       className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Decrypt
+                                        File</a>
                                 </li>
                                 <li>
                                     <a href="#"
-                                       className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Decrypt Text</a>
+                                       className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Decrypt
+                                        Text</a>
                                 </li>
                             </ul>
                         </div>
