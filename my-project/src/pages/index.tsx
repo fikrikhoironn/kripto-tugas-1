@@ -3,6 +3,8 @@ import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
 import { useState } from "react";
+import ButtonText from "@/components/button";
+import Navbar from "@/components/navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 const algorithms = [
@@ -25,6 +27,7 @@ export default function Home() {
   return (
     <>
       <div className="bg-black flex flex-col justify-center items-center h-screen gap-6">
+        <Navbar />
         <div className="text-4xl font-extrabold text-blue-600">Enkripsi</div>
         <div className="flex flex-col justify-center items-center">
           <div className="dropdown inline-block relative">
@@ -101,12 +104,7 @@ export default function Home() {
           </div>
         </div>
         <div>
-          <button
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            type="button"
-          >
-            Enkripsi{" "}
-          </button>
+            <ButtonText text={"Encrypt"}></ButtonText>
         </div>
         <div className="flex flex-row gap-8 w-screen justify-center">
           <div>
@@ -119,12 +117,7 @@ export default function Home() {
           </div>
         </div>
         <div>
-          <button
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            type="button"
-          >
-            Download Ciphertext
-          </button>
+          <ButtonText text={"Download Ciphertext"}></ButtonText>
         </div>
       </div>
     </>
