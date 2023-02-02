@@ -8,17 +8,18 @@ import Navbar from "@/components/navbar";
 
 const inter = Inter({subsets: ["latin"]});
 const algorithms = [
-    {id: 1, label: "Vigenere Cipher standard"},
-    {id: 2, label: "Varian Vigenere Cipher"},
-    {id: 3, label: "Extended Vigenere Cipher"},
-    {id: 4, label: "Affine Cipher"},
-    {id: 5, label: "Playfair Cipher"},
-    {id: 6, label: "Hill Cipher"},
+    {id: 0, label: "Vigenere Cipher standard"},
+    {id: 1, label: "Varian Vigenere Cipher"},
+    {id: 2, label: "Extended Vigenere Cipher"},
+    {id: 3, label: "Affine Cipher"},
+    {id: 4, label: "Playfair Cipher"},
+    {id: 5, label: "Hill Cipher"},
 ];
 
 export default function Home() {
     const [selectedItem, setSelectedItem] = useState(null);
     const [key, setKey] = useState("");
+    const [plainText, setPlainText] = useState("");
 
     const handleItemClick = (id: any) => {
         setSelectedItem(id);
@@ -37,7 +38,7 @@ export default function Home() {
                             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                             type="button"
                         >
-                            {selectedItem ? algorithms[selectedItem].label : "Algorithms"}{" "}
+                            {selectedItem !== null ? algorithms[selectedItem].label : "Algorithms"}{" "}
                             <svg
                                 className="w-4 h-4 ml-2"
                                 aria-hidden="true"
@@ -60,7 +61,7 @@ export default function Home() {
                                 <li className="">
                                     <a
                                         className="rounded-t bg-gray-700 py-2 px-4 block whitespace-no-wrap text-[12px] hover:bg-gray-400 hover:text-white "
-                                        onClick={(e) => handleItemClick(algorithm.id)}
+                                        onClick={() => handleItemClick(algorithm.id)}
                                     >
                                         {algorithm.label}
                                     </a>
@@ -76,17 +77,15 @@ export default function Home() {
                     >
                         Enter Key
                     </label>
-                    <form action="">
-              <textarea
-                  name="key"
-                  id="key"
-                  cols={60}
-                  rows={5}
-                  className="overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
-                  onKeyUp={(e) => setKey(e.currentTarget.value)}
-              ></textarea>
-                        {console.log(key)}
-                    </form>
+                    <textarea
+                        name="key"
+                        id="key"
+                        cols={60}
+                        rows={5}
+                        className="overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
+                        onKeyUp={(e) => setKey(e.currentTarget.value)}
+                    ></textarea>
+                    {console.log(key)}
                 </div>
                 <div className="">
                     <div className="flex flex-col justify-center items-center">
@@ -109,8 +108,14 @@ export default function Home() {
                 <div className="flex flex-row gap-8 w-screen justify-center">
                     <div>
                         <div className="text-white mb-2 font-medium">Plaintext</div>
-                        <div
-                            className="relative bg-white w-[500px] h-[400px] rounded-lg shadow overflow-y-auto text-[12px] font-helvetica"></div>
+                        <textarea
+                            name="plaintext"
+                            cols={60}
+                            rows={22}
+                            className="overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
+                            onKeyUp={(e) => setPlainText(e.currentTarget.value)}
+                        >{}
+</textarea>
                     </div>
                     <div>
                         <div className="text-white mb-2 font-medium">Ciphertext</div>
