@@ -41,14 +41,14 @@ export default function Home() {
         if (selectedItem === 3) {
             obj = {
                 plaintext: plainText,
-                m: key,
+                key: key,
                 group: groupText,
-                b: keyB,
+                keyB: keyB,
             }
         } else if (selectedItem === 5) {
             obj = {
                 plaintext: plainText,
-                m: key,
+                key: key,
                 group: groupText,
                 matrix: matrix,
             }
