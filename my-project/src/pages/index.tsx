@@ -84,16 +84,22 @@ export default function Home() {
         }
         console.log(statusCheckbox);
     }
+    
     // read file from upload
-    const handleUploadFile = (e: any) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.readAsText(file);
-        reader.onload = function () {
-            // @ts-ignore
-            setPlainText(reader.result);
-            console.log("textFile: "+plainText);
-        };
+    const handleUploadFile = async (e: any) => {
+        if (selectedItem === null) return;
+        if (selectedItem !== 2) {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                if (event.target){
+                    console.log(event.target.result);
+                    setPlainText(event.target.result as string);
+                }
+            }
+
+            reader.readAsText(file);
+        }
     }
 
     const downloadFile = () => {
@@ -118,6 +124,7 @@ export default function Home() {
                             name="plaintext"
                             cols={60}
                             rows={12}
+                            value={plainText}
                             className="p-3 overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50 "
                             onKeyUp={(e) => setPlainText(e.currentTarget.value)}
                         >{}
