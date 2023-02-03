@@ -4,6 +4,10 @@ import sympy as sym
 def hillEncrypt(plaintext, m, matrix, group):
   m = int(m)
 
+  # add padding to plaintext
+  if (len(plaintext) % m != 0):
+    plaintext += "X" * (m - (len(plaintext) % m))
+
   # convert matrix to matrix int
   for i in range(m):
     for j in range(m):
@@ -80,16 +84,16 @@ def hillDecrypt(ciphertext, m, matrix):
   
   return plaintext
 
-if __name__ == "__main__":
-  plaintext = input("Enter plaintext: ")
-  m = int(input("Enter m: "))
-  matrix = []
-  for i in range(m):
-    matrix.append([])
-    for j in range(m):
-      matrix[i].append(int(input("Enter matrix[{}][{}]: ".format(i, j))))
-  print("Ciphertext: ", hillEncrypt(plaintext, m, matrix))
-  ciphertext = input("Enter ciphertext: ")
-  # hillDecrypt(ciphertext, m, matrix)
-  # hillDecrypt("LNSHDLEWMTRW", m, matrix)
-  print("Plaintext: ", hillDecrypt(ciphertext, m, matrix))
+# if __name__ == "__main__":
+#   plaintext = input("Enter plaintext: ")
+#   m = int(input("Enter m: "))
+#   matrix = []
+#   for i in range(m):
+#     matrix.append([])
+#     for j in range(m):
+#       matrix[i].append(int(input("Enter matrix[{}][{}]: ".format(i, j))))
+#   print("Ciphertext: ", hillEncrypt(plaintext, m, matrix))
+#   ciphertext = input("Enter ciphertext: ")
+#   # hillDecrypt(ciphertext, m, matrix)
+#   # hillDecrypt("LNSHDLEWMTRW", m, matrix)
+#   print("Plaintext: ", hillDecrypt(ciphertext, m, matrix))

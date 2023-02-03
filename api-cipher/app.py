@@ -189,9 +189,6 @@ def encrypt_hill():
     else:
         group = False
 
-    print(plaintext)
-    print(m)
-    print(matrix)
     ciphertext = hillEncrypt(plaintext, m, matrix, group)
 
     # return jsonify({"ciphertext": "ciphertext"})
@@ -203,7 +200,7 @@ def encrypt_hill():
 def decrypt_hill():
     input_json = request.get_json(force=True)
     ciphertext = input_json['ciphertext']
-    m = input_json['m']
+    m = int(input_json['m'])
     matrix = input_json['matrix']
 
     plaintext = hillDecrypt(ciphertext, m, matrix)
