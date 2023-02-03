@@ -48,11 +48,28 @@ export default function Home() {
   const decrypt = () => {
     // @ts-ignore
     if (!selectedItem) return;
+    let obj;
+    if (selectedItem === 3) {
+      obj = {
+        ciphertext: cipherText,
+        m : key,
+        b : keyB
+      }
+    } else if (selectedItem === 5) {
+      obj = {
+        ciphertext: cipherText,
+        matrix: hillMat
+      }
+    } else {
+      obj = {
+        ciphertext: cipherText,
+        key: key
+      }
+    }
+
+    
     axios
-        .post(`http://127.0.0.1:5000/decrypt/${algorithms[selectedItem].endpoint}`, {
-          ciphertext: cipherText,
-          key: key,
-        }).then((res) => {
+        .post(`http://127.0.0.1:5000/decrypt/${algorithms[selectedItem].endpoint}`, obj).then((res) => {
       console.log(res.data);
       setPlainText(res.data.plaintext);
     });
