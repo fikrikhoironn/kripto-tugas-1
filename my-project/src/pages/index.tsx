@@ -37,12 +37,12 @@ export default function Home() {
             let row = line[i].split(" ");
             mat.push(row);
         }
-        // console.log(mat)
+        console.log(mat)
         setHillMat(mat);
     }
     
     const encrypt = () => {
-        if (!selectedItem) return;
+        if (selectedItem === null) return;
         let obj;
         if (selectedItem === 3) {
             obj = {

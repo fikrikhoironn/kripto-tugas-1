@@ -45,7 +45,7 @@ export default function Home() {
 
   const decrypt = () => {
     // @ts-ignore
-    if (!selectedItem) return;
+    if (selectedItem === null) return;
     let obj;
     if (selectedItem === 3) {
       obj = {
