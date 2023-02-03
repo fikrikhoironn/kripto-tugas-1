@@ -29,10 +29,6 @@ export default function Home() {
         setSelectedItem(id);
         console.log(algorithms[id].label);
     };
-
-    const print = () => {
-        console.log("print");
-    }
     
     const handleMatrix = (text: string) => {
         let line = text.split("\n");
@@ -41,7 +37,7 @@ export default function Home() {
             let row = line[i].split(" ");
             mat.push(row);
         }
-        console.log(mat)
+        // console.log(mat)
         setHillMat(mat);
     }
     

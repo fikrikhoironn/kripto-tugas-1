@@ -22,8 +22,6 @@ export default function Home() {
   const [cipherText, setCipherText] = useState("");
   const [matrix, setMatrix] = useState("");
   const [hillMat, setHillMat] = useState([] as string[][]);
-  const [statusCheckbox, setStatusCheckbox] = useState(true);
-  const [groupText, setGroupText] = useState("");
 
   const handleItemClick = (id: any) => {
     setSelectedItem(id);
@@ -56,8 +54,10 @@ export default function Home() {
         b : keyB
       }
     } else if (selectedItem === 5) {
+      handleMatrix(matrix);
       obj = {
         ciphertext: cipherText,
+        m: key,
         matrix: hillMat
       }
     } else {
