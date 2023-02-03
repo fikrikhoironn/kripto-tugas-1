@@ -13,12 +13,20 @@ inverse = {
   25: 25
 }
 
-def affineEncrypt(plaintext, m, b):
+def affineEncrypt(plaintext, m, b, group):
   ciphertext = ""
   plaintext = plaintext.replace(" ", "")
   plaintext = plaintext.upper()
   for c in plaintext:
     ciphertext += chr(((ord(c)-65)*m+b)%26 + 65)
+
+  if group:
+    ciphertextGroup = ""
+    for i in range(len(ciphertext)):
+      ciphertextGroup += ciphertext[i]
+      if (i+1) % 5 == 0:
+        ciphertextGroup += " "
+    return ciphertextGroup
   return ciphertext
 
 def affineDecrypt(ciphertext, m, b):

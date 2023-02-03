@@ -1,7 +1,7 @@
 import sympy as sym
 
 
-def hillEncrypt(plaintext, m, matrix):
+def hillEncrypt(plaintext, m, matrix, group):
   plaintext = plaintext.replace(" ", "").upper()
   ciphertext = ""
 
@@ -26,7 +26,14 @@ def hillEncrypt(plaintext, m, matrix):
       for k in range(m):
         num += (ord(plaintext[i+k])-65) * matrix[j][k]
       ciphertext += chr(num%26 + 65)
-  
+
+  if group:
+    ciphertextGroup = ""
+    for i in range(len(ciphertext)):
+      ciphertextGroup += ciphertext[i]
+      if (i+1) % 5 == 0:
+        ciphertextGroup += " "
+    return ciphertextGroup
   return ciphertext
 
 def hillDecrypt(ciphertext, m, matrix):

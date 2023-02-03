@@ -119,8 +119,13 @@ def encrypt_affine():
     plaintext = input_json['plaintext']
     m = input_json['m']
     b = input_json['b']
+    group = input_json['group']
+    if group == "true":
+        group = True
+    else:
+        group = False
 
-    ciphertext = affineEncrypt(plaintext, m, b)
+    ciphertext = affineEncrypt(plaintext, m, b, group)
 
     return jsonify({"ciphertext": ciphertext})
 
@@ -144,8 +149,13 @@ def encrypt_playfair():
     input_json = request.get_json(force=True)
     plaintext = input_json['plaintext']
     key = input_json['key']
+    group = input_json['group']
+    if group == "true":
+        group = True
+    else:
+        group = False
 
-    ciphertext = playfairEncrypt(plaintext, key)
+    ciphertext = playfairEncrypt(plaintext, key, group)
 
     return jsonify({"ciphertext": ciphertext})
 
@@ -169,8 +179,13 @@ def encrypt_hill():
     plaintext = input_json['plaintext']
     m = input_json['m']
     matrix = input_json['matrix']
+    group = input_json['group']
+    if group == "true":
+        group = True
+    else:
+        group = False
 
-    ciphertext = hillEncrypt(plaintext, m, matrix)
+    ciphertext = hillEncrypt(plaintext, m, matrix,group)
 
     return jsonify({"ciphertext": ciphertext})
 

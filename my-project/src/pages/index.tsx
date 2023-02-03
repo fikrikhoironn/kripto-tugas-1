@@ -21,6 +21,8 @@ const algorithms = [
 export default function Home() {
     const [selectedItem, setSelectedItem] = useState(null);
     const [key, setKey] = useState("");
+    const [keyB, setKeyB] = useState("");
+    const [matrix, setMatrix] = useState("");
     const [plainText, setPlainText] = useState("");
     const [cipherText, setCipherText] = useState("");
     const [statusCheckbox, setStatusCheckbox] = useState(true);
@@ -153,20 +155,54 @@ export default function Home() {
 
                 </div>
                 <div className="flex flex-col justify-center items-center">
-                    <label
-                        htmlFor="key"
-                        className="block text-white text-sm font-medium mb-2 "
-                    >
-                        Enter Key
-                    </label>
-                    <textarea
-                        name="key"
-                        id="key"
-                        cols={60}
-                        rows={5}
-                        className="overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
-                        onKeyUp={(e) => setKey(e.currentTarget.value)}
-                    ></textarea>
+                    <div>
+                        <label
+                            htmlFor="key"
+                            className="block text-white text-sm font-medium mb-2 "
+                        >
+                            Enter Key
+                        </label>
+                        <textarea
+                            name="key"
+                            id="key"
+                            cols={60}
+                            rows={5}
+                            className="overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
+                            onKeyUp={(e) => setKey(e.currentTarget.value)}
+                        ></textarea>
+                    </div>
+                    {selectedItem === 3 && (<div className="mt-3">
+                        <label
+                            htmlFor="key"
+                            className="block text-white text-sm font-medium mb-2 "
+                        >
+                            Enter Key B
+                        </label>
+                        <textarea
+                            name="key"
+                            id="key"
+                            cols={60}
+                            rows={5}
+                            className="overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
+                            onKeyUp={(e) => setKeyB(e.currentTarget.value)}
+                        ></textarea>
+                    </div>)}
+                    {selectedItem === 5 && (<div className="mt-3">
+                        <label
+                            htmlFor="key"
+                            className="block text-white text-sm font-medium mb-2 "
+                        >
+                            Enter Matrix
+                        </label>
+                        <textarea
+                            name="key"
+                            id="key"
+                            cols={60}
+                            rows={5}
+                            className="overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
+                            onKeyUp={(e) => setMatrix(e.currentTarget.value)}
+                        ></textarea>
+                    </div>)}
                 </div>
                 <div className="">
                     <div className="flex flex-col justify-center items-center">

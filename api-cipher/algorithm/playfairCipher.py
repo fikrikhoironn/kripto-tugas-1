@@ -1,6 +1,6 @@
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-def playfairEncrypt(plaintext, key):
+def playfairEncrypt(plaintext, key, group):
   plaintext = plaintext.replace(" ", "")
   plaintext = plaintext.upper()
 
@@ -64,6 +64,13 @@ def playfairEncrypt(plaintext, key):
     ciphertext += sisa
   
   print("ciphertext", ciphertext)
+  if group:
+    ciphertextGroup = ""
+    for i in range(len(ciphertext)):
+      ciphertextGroup += ciphertext[i]
+      if (i + 1) % 5 == 0:
+        ciphertextGroup += " "
+    return ciphertextGroup
   return ciphertext
 
 def playfairDecrypt(ciphertext, key):
