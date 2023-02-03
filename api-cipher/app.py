@@ -1,9 +1,12 @@
 from algorithm.affineCipher import affineDecrypt, affineEncrypt
+from algorithm.autoKeyVigenereCipher import (autoKeyVigenereCipherDecrypt,
+                                             autoKeyVigenereCipherEncrypt)
+from algorithm.extendedVigenereCipher import (extendedVigenereCipherDecrypt,
+                                              extendedVigenereCipherEncrypt)
 from algorithm.hillCipher import hillDecrypt, hillEncrypt
 from algorithm.playfairCipher import playfairDecrypt, playfairEncrypt
-from algorithm.vigenereCipher import vigenereCipherDecrypt, vigenereCipherEncrypt
-from algorithm.autoKeyVigenereCipher import autoKeyVigenereCipherDecrypt, autoKeyVigenereCipherEncrypt
-from algorithm.extendedVigenereCipher import extendedVigenereCipherDecrypt, extendedVigenereCipherEncrypt
+from algorithm.vigenereCipher import (vigenereCipherDecrypt,
+                                      vigenereCipherEncrypt)
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
 
@@ -119,6 +122,9 @@ def encrypt_affine():
     plaintext = input_json['plaintext']
     m = input_json['m']
     b = input_json['b']
+
+    m = int(m)
+    b = int(b)
     group = input_json['group']
     if group == "true":
         group = True
@@ -185,8 +191,12 @@ def encrypt_hill():
     else:
         group = False
 
-    ciphertext = hillEncrypt(plaintext, m, matrix,group)
+    print(plaintext)
+    print(m)
+    print(matrix)
+    ciphertext = hillEncrypt(plaintext, m, matrix, group)
 
+    # return jsonify({"ciphertext": "ciphertext"})
     return jsonify({"ciphertext": ciphertext})
 
 

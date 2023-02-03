@@ -2,6 +2,13 @@ import sympy as sym
 
 
 def hillEncrypt(plaintext, m, matrix, group):
+  m = int(m)
+
+  # convert matrix to matrix int
+  for i in range(m):
+    for j in range(m):
+      matrix[i][j] = int(matrix[i][j])
+
   plaintext = plaintext.replace(" ", "").upper()
   ciphertext = ""
 
