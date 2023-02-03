@@ -185,7 +185,7 @@ export default function Home() {
 
                 </div>
                 <div className="flex flex-col justify-center items-center">
-                    <div>
+                    <div className=" flex flex-col justify-center items-center">
                         <label
                             htmlFor="key"
                             className="block text-white text-sm font-medium mb-2 "
@@ -195,13 +195,13 @@ export default function Home() {
                         <textarea
                             name="key"
                             id="key"
-                            cols={60}
-                            rows={1}
+                            cols={40}
+                            rows={2}
                             className="p-2 overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
                             onKeyUp={(e) => setKey(e.currentTarget.value)}
                         ></textarea>
                     </div>
-                    {selectedItem === 3 && (<div className="mt-3">
+                    {selectedItem === 3 && (<div className="mt-3 flex flex-col justify-center items-center">
                         <label
                             htmlFor="key"
                             className="block text-white text-sm font-medium mb-2 "
@@ -211,13 +211,13 @@ export default function Home() {
                         <textarea
                             name="key"
                             id="key"
-                            cols={60}
-                            rows={1}
+                            cols={40}
+                            rows={2}
                             className="p-2 overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
                             onKeyUp={(e) => setKeyB(e.currentTarget.value)}
                         ></textarea>
                     </div>)}
-                    {selectedItem === 5 && (<div className="mt-3">
+                    {selectedItem === 5 && (<div className="mt-3 flex flex-col justify-center items-center">
                         <label
                             htmlFor="key"
                             className="block text-white text-sm font-medium mb-2 "
@@ -227,9 +227,9 @@ export default function Home() {
                         <textarea
                             name="key"
                             id="key"
-                            cols={60}
+                            cols={40}
                             rows={5}
-                            className="overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
+                            className="p-2 overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
                             onKeyUp={(e) => setMatrix(e.currentTarget.value)}
                         ></textarea>
                     </div>)}

@@ -1,12 +1,8 @@
-import Head from "next/head";
-import Image from "next/image";
-import {Inter} from "@next/font/google";
-import styles from "@/styles/Home.module.css";
-import React, {useState} from "react";
 import ButtonText from "@/components/button";
 import Navbar from "@/components/navbar";
+import { Inter } from "@next/font/google";
 import axios from "axios";
-import {string} from "prop-types";
+import { useState } from "react";
 
 const inter = Inter({subsets: ["latin"]});
 const algorithms = [
@@ -21,8 +17,11 @@ const algorithms = [
 export default function Home() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [key, setKey] = useState("");
+  const [keyB, setKeyB] = useState("");
   const [plainText, setPlainText] = useState("");
   const [cipherText, setCipherText] = useState("");
+  const [matrix, setMatrix] = useState("");
+  const [hillMat, setHillMat] = useState([] as string[][]);
   const [statusCheckbox, setStatusCheckbox] = useState(true);
   const [groupText, setGroupText] = useState("");
 
@@ -34,15 +33,28 @@ export default function Home() {
   const print = () => {
     console.log("print");
   }
+
+  const handleMatrix = (text: string) => {
+    let line = text.split("\n");
+    let mat = [];
+    for (let i = 0; i < line.length; i++) {
+        let row = line[i].split(" ");
+        mat.push(row);
+    }
+    console.log(mat)
+    setHillMat(mat);
+  }
+
   const decrypt = () => {
     // @ts-ignore
+    if (!selectedItem) return;
     axios
         .post(`http://127.0.0.1:5000/decrypt/${algorithms[selectedItem].endpoint}`, {
           ciphertext: cipherText,
           key: key,
         }).then((res) => {
       console.log(res.data);
-      setPlainText(res.data);
+      setPlainText(res.data.plaintext);
     });
     console.log("cipherText: "+cipherText);
     console.log("plaintext: "+plainText);
@@ -64,7 +76,7 @@ export default function Home() {
 
   const downloadFile = () => {
     const element = document.createElement("a");
-    const file = new Blob([plainText.plaintext], {type: 'text/plain'});
+    const file = new Blob([plainText], {type: 'text/plain'});
     element.href = URL.createObjectURL(file);
     element.download = "plaintext.txt";
     document.body.appendChild(element); // Required for this to work in FireFox
@@ -72,7 +84,7 @@ export default function Home() {
   }
   return (
       <>
-        <div className="bg-black flex flex-col justify-center items-center h-full gap-6">
+        <div className="bg-black flex flex-col justify-center items-center h-[100vh] gap-4">
           <div className="fixed top-0">
             <Navbar/>
           </div>
@@ -83,22 +95,20 @@ export default function Home() {
               <textarea
                   name="ciphertext"
                   cols={60}
-                  rows={22}
-                  className="overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
+                  rows={12}
+                  className="p-3 overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
                   onKeyUp={(e) => setCipherText(e.currentTarget.value)}
-              >{}
-</textarea>
+              ></textarea>
             </div>
             <div>
               <div className="text-white mb-2 font-medium">Plaintext</div>
               <textarea
                   name="plaintext"
                   cols={60}
-                  rows={22}
-                  className="overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
-                  value={plainText.plaintext}
-              >
-</textarea>
+                  rows={12}
+                  className="p-3 overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
+                  value={plainText}
+              ></textarea>
             </div>
           </div>
           <div className="flex flex-row justify-center items-center gap-6">
@@ -117,9 +127,9 @@ export default function Home() {
                     xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M19 9l-7 7-7-7"
                   ></path>
                 </svg>
@@ -151,17 +161,49 @@ export default function Home() {
                 htmlFor="key"
                 className="block text-white text-sm font-medium mb-2 "
             >
-              Enter Key
+              {selectedItem === 3 ? "Enter Key M" : "Enter Key"}
             </label>
             <textarea
                 name="key"
                 id="key"
-                cols={60}
-                rows={5}
-                className="overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
+                cols={40}
+                rows={2}
+                className="p-2 overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
                 onKeyUp={(e) => setKey(e.currentTarget.value)}
             ></textarea>
           </div>
+          {selectedItem === 3 && (<div className="mt-3 flex flex-col justify-center items-center">
+              <label
+                  htmlFor="key"
+                  className="block text-white text-sm font-medium mb-2 "
+              >
+                  Enter Key B
+              </label>
+              <textarea
+                  name="key"
+                  id="key"
+                  cols={40}
+                  rows={2}
+                  className="p-2 overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
+                  onKeyUp={(e) => setKeyB(e.currentTarget.value)}
+              ></textarea>
+          </div>)}
+          {selectedItem === 5 && (<div className="mt-3 flex flex-col justify-center items-center">
+              <label
+                  htmlFor="key"
+                  className="block text-white text-sm font-medium mb-2 "
+              >
+                  Enter Matrix
+              </label>
+              <textarea
+                  name="key"
+                  id="key"
+                  cols={40}
+                  rows={5}
+                  className="p-2 overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
+                  onKeyUp={(e) => setMatrix(e.currentTarget.value)}
+              ></textarea>
+          </div>)}
           <div className="">
             <div className="flex flex-col justify-center items-center">
               <label
