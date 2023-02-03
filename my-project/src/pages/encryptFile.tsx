@@ -56,26 +56,6 @@ export default function Home() {
         }
         console.log(statusCheckbox);
     }
-    // read file from upload
-    const handleUploadFile = (e: any) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.readAsText(file);
-        reader.onload = function () {
-            // @ts-ignore
-            setPlainText(reader.result);
-            console.log("textFile: "+plainText);
-        };
-    }
-
-    const downloadFile = () => {
-        const element = document.createElement("a");
-        const file = new Blob([cipherText.ciphertext], {type: 'text/plain'});
-        element.href = URL.createObjectURL(file);
-        element.download = "ciphertext.txt";
-        document.body.appendChild(element); // Required for this to work in FireFox
-        element.click();
-    }
     return (
         <>
             <div className="bg-black flex flex-col justify-center items-center h-full gap-6">
@@ -97,14 +77,10 @@ export default function Home() {
                     </div>
                     <div>
                         <div className="text-white mb-2 font-medium">Ciphertext</div>
-                        <textarea
-                            name="ciphertext"
-                            cols={60}
-                            rows={22}
-                            className="overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
-                            value={cipherText.ciphertext}
-                        >
-</textarea>
+                        <div
+                            className="relative bg-white w-[500px] h-[400px] rounded-lg shadow overflow-y-auto text-[12px] font-helvetica">
+                            {cipherText.ciphertext}
+                        </div>
                     </div>
                 </div>
                 <div className="flex flex-row justify-center items-center gap-6">
@@ -180,7 +156,6 @@ export default function Home() {
                             className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                             id="file_input"
                             type="file"
-                            onChange={handleUploadFile}
                         />
                     </div>
                 </div>
@@ -189,7 +164,7 @@ export default function Home() {
                 </div>
 
                 <div className="pb-14">
-                    <ButtonText text={"Download Ciphertext"} onClick={downloadFile}></ButtonText>
+                    <ButtonText text={"Download Ciphertext"}></ButtonText>
                 </div>
             </div>
         </>
