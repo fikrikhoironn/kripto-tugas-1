@@ -17,8 +17,6 @@ def affineEncrypt(plaintext, m, b, group):
   ciphertext = ""
   plaintext = plaintext.replace(" ", "")
   plaintext = plaintext.upper()
-  print("m: ", m)
-  print("b: ", b)
   for c in plaintext:
     ciphertext += chr(((ord(c)-65)*m+b)%26 + 65)
 

@@ -120,11 +120,9 @@ def decrypt_vigenere_extended():
 def encrypt_affine():
     input_json = request.get_json(force=True)
     plaintext = input_json['plaintext']
-    m = input_json['m']
-    b = input_json['b']
+    m = int(input_json['m'])
+    b = int(input_json['b'])
 
-    m = int(m)
-    b = int(b)
     group = input_json['group']
     if group == "true":
         group = True
@@ -141,8 +139,8 @@ def encrypt_affine():
 def decrypt_affine():
     input_json = request.get_json(force=True)
     ciphertext = input_json['ciphertext']
-    m = input_json['m']
-    b = input_json['b']
+    m = int(input_json['m'])
+    b = int(input_json['b'])
 
     plaintext = affineDecrypt(ciphertext, m, b)
 

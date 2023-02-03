@@ -1,16 +1,24 @@
-alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
 
 def playfairEncrypt(plaintext, key, group):
   plaintext = plaintext.replace(" ", "")
   plaintext = plaintext.upper()
+  plaintext = plaintext.replace("J", "I")
+
+  # insert x if there is double letter
+  for i in range(len(plaintext)-1):
+    if plaintext[i] == plaintext[i+1]:
+      plaintext = plaintext[:i+1] + "X" + plaintext[i+1:]
+  
+  # add x if odd number of letters
+  if len(plaintext) % 2 != 0:
+    plaintext += "X"
 
   # remove duplicate letters
-  key = "".join(dict.fromkeys(key))
   key = key.upper()
-
-  # debugging
-  print("plaintext", plaintext)
-  print("key", key)
+  key = key.replace(" ", "")
+  key = key.replace("J", "")
+  key = "".join(dict.fromkeys(key))
 
   # create 5x5 matrix
   cnt = 0
@@ -63,7 +71,7 @@ def playfairEncrypt(plaintext, key, group):
   if sisa != "":
     ciphertext += sisa
   
-  print("ciphertext", ciphertext)
+  # print("ciphertext", ciphertext)
   if group:
     ciphertextGroup = ""
     for i in range(len(ciphertext)):
@@ -75,7 +83,9 @@ def playfairEncrypt(plaintext, key, group):
 
 def playfairDecrypt(ciphertext, key):
   ciphertext = ciphertext.replace(" ", "").upper()
-  key = "".join(dict.fromkeys(key)).upper()
+  key = key.replace(" ", "").upper()
+  key = "".join(dict.fromkeys(key))
+  key = key.replace("J", "")
 
   # create 5x5 matrix
   cnt = 0
@@ -124,15 +134,14 @@ def playfairDecrypt(ciphertext, key):
   
   if sisa != "":
     plaintext += sisa
-  
-  print("plaintext", plaintext)
+
   return plaintext
 
-def main():
-  plaintext = input("Masukkan plainteks: ")
-  key = input("Masukkan kunci: ")
-  ciphertext = playfairEncrypt(plaintext, key)
-  playfairDecrypt(ciphertext, key)
+# def main():
+#   plaintext = input("Masukkan plainteks: ")
+#   key = input("Masukkan kunci: ")
+#   ciphertext = playfairEncrypt(plaintext, key)
+#   playfairDecrypt(ciphertext, key)
 
-if __name__ == "__main__":
-  main()
+# if __name__ == "__main__":
+#   main()
