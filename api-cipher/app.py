@@ -47,13 +47,9 @@ def decrypt_vigenere_simple():
     input_json = request.get_json(force=True)
     ciphertext = input_json['ciphertext']
     key = input_json['key']
-    group = input_json['group']
-    if group == "true":
-        group = True
-    else:
-        group = False
 
-    plaintext = vigenereCipherDecrypt(ciphertext, key, group)
+
+    plaintext = vigenereCipherDecrypt(ciphertext, key)
 
     return jsonify({"plaintext": plaintext})
 
@@ -81,13 +77,8 @@ def decrypt_vigenere_autokey():
     input_json = request.get_json(force=True)
     ciphertext = input_json['ciphertext']
     key = input_json['key']
-    group = input_json['group']
-    if group == "true":
-        group = True
-    else:
-        group = False
 
-    plaintext = autoKeyVigenereCipherDecrypt(ciphertext, key, group)
+    plaintext = autoKeyVigenereCipherDecrypt(ciphertext, key)
 
     return jsonify({"plaintext": plaintext})
 
@@ -115,13 +106,8 @@ def decrypt_vigenere_extended():
     input_json = request.get_json(force=True)
     ciphertext = input_json['ciphertext']
     key = input_json['key']
-    group = input_json['group']
-    if group == "true":
-        group = True
-    else:
-        group = False
 
-    plaintext = extendedVigenereCipherDecrypt(ciphertext, key, group)
+    plaintext = extendedVigenereCipherDecrypt(ciphertext, key)
 
     return jsonify({"plaintext": plaintext})
 

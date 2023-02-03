@@ -1,5 +1,5 @@
 # extended vigenere cipher function, vigenere cipher with 256 characters
-def extendedVigenereCipherEncrypt(plaintext, key):
+def extendedVigenereCipherEncrypt(plaintext, key, group):
     plaintext = plaintext.replace(" ", "")
     key = key.replace(" ", "")
     plaintext = plaintext.upper()
@@ -14,6 +14,13 @@ def extendedVigenereCipherEncrypt(plaintext, key):
         ciphertext += chr((charcode + keycharcode) % 256)
         keyIndex = (keyIndex + 1) % len(key)
 
+    if group:
+        plaintextGroup = ""
+        for i in range(len(plaintext)):
+            plaintextGroup += plaintext[i]
+            if (i+1) % 5 == 0:
+                plaintextGroup += " "
+        return plaintextGroup
     return ciphertext
 
 def extendedVigenereCipherDecrypt(ciphertext, key):
