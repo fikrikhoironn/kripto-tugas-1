@@ -19,3 +19,8 @@
 .dropdown:hover .dropdown-menu {
   display: block;
 }
+
+body {
+  overflow-x: hidden;
+  min-height: 100vh;
+}

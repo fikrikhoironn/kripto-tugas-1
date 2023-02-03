@@ -1,12 +1,8 @@
-import Head from "next/head";
-import Image from "next/image";
-import {Inter} from "@next/font/google";
-import styles from "@/styles/Home.module.css";
-import React, {useState} from "react";
 import ButtonText from "@/components/button";
 import Navbar from "@/components/navbar";
+import { Inter } from "@next/font/google";
 import axios from "axios";
-import {string} from "prop-types";
+import { useState } from "react";
 
 const inter = Inter({subsets: ["latin"]});
 const algorithms = [
@@ -23,6 +19,7 @@ export default function Home() {
     const [key, setKey] = useState("");
     const [keyB, setKeyB] = useState("");
     const [matrix, setMatrix] = useState("");
+    const [hillMat, setHillMat] = useState([] as string[][])
     const [plainText, setPlainText] = useState("");
     const [cipherText, setCipherText] = useState("");
     const [statusCheckbox, setStatusCheckbox] = useState(true);
@@ -36,7 +33,20 @@ export default function Home() {
     const print = () => {
         console.log("print");
     }
+    
+    const handleMatrix = (text: string) => {
+        let line = text.split("\n");
+        let mat = [];
+        for (let i = 0; i < line.length; i++) {
+            let row = line[i].split(" ");
+            mat.push(row);
+        }
+        console.log(mat)
+        setHillMat(mat);
+    }
+    
     const encrypt = () => {
+        if (!selectedItem) return;
         let obj;
         if (selectedItem === 3) {
             obj = {
@@ -46,11 +56,12 @@ export default function Home() {
                 b: keyB,
             }
         } else if (selectedItem === 5) {
+            handleMatrix(matrix)
             obj = {
                 plaintext: plainText,
                 m: key,
                 group: groupText,
-                matrix: matrix,
+                matrix: hillMat,
             }
         } else {
             obj = {
@@ -64,7 +75,7 @@ export default function Home() {
         axios
             .post(`http://127.0.0.1:5000/encrypt/${algorithms[selectedItem].endpoint}`,obj).then((res) => {
             console.log(res.data);
-            setCipherText(res.data);
+            setCipherText(res.data.ciphertext);
         });
     }
     const handleCheckbox = () => {
@@ -91,7 +102,7 @@ export default function Home() {
 
     const downloadFile = () => {
         const element = document.createElement("a");
-        const file = new Blob([cipherText.ciphertext], {type: 'text/plain'});
+        const file = new Blob([cipherText], {type: 'text/plain'});
         element.href = URL.createObjectURL(file);
         element.download = "ciphertext.txt";
         document.body.appendChild(element); // Required for this to work in FireFox
@@ -99,33 +110,33 @@ export default function Home() {
     }
     return (
         <>
-            <div className="bg-black flex flex-col justify-center items-center h-full gap-6">
+            <div className="bg-black flex flex-col justify-center items-center h-[100vh] gap-4">
                 <div className="fixed top-0">
                     <Navbar/>
                 </div>
                 <div className="text-4xl font-extrabold text-blue-600 mt-24">Enkripsi</div>
                 <div className="flex flex-row gap-8 w-screen justify-center">
                     <div>
-                        <div className="text-white mb-2 font-medium">Plaintext</div>
+                        <div className="text-white mb-2 font-medium border-box">Plaintext</div>
                         <textarea
                             name="plaintext"
                             cols={60}
-                            rows={22}
-                            className="overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
+                            rows={12}
+                            className="p-3 overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50 "
                             onKeyUp={(e) => setPlainText(e.currentTarget.value)}
                         >{}
-</textarea>
+                        </textarea>
                     </div>
                     <div>
                         <div className="text-white mb-2 font-medium">Ciphertext</div>
                         <textarea
                             name="ciphertext"
                             cols={60}
-                            rows={22}
-                            className="overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
-                            value={cipherText.ciphertext}
+                            rows={12}
+                            className="p-3 overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
+                            value={cipherText}
                         >
-</textarea>
+                        </textarea>
                     </div>
                 </div>
                 <div className="flex flex-row justify-center items-center gap-6">
@@ -144,9 +155,9 @@ export default function Home() {
                                 xmlns="http://www.w3.org/2000/svg"
                             >
                                 <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
                                     d="M19 9l-7 7-7-7"
                                 ></path>
                             </svg>
@@ -154,7 +165,7 @@ export default function Home() {
                         <ul className="dropdown-menu absolute hidden text-gray-200 pt-2">
                             {algorithms.map((algorithm) => (
                                 // eslint-disable-next-line react/jsx-key
-                                <li className="">
+                                <li className="" key={algorithm.id}>
                                     <a
                                         className="rounded-t bg-gray-700 py-2 px-4 block whitespace-no-wrap text-[12px] hover:bg-gray-400 hover:text-white "
                                         onClick={() => handleItemClick(algorithm.id)}
@@ -179,14 +190,14 @@ export default function Home() {
                             htmlFor="key"
                             className="block text-white text-sm font-medium mb-2 "
                         >
-                            Enter Key
+                            {selectedItem === 3 ? "Enter Key M" : "Enter Key"}
                         </label>
                         <textarea
                             name="key"
                             id="key"
                             cols={60}
-                            rows={5}
-                            className="overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
+                            rows={1}
+                            className="p-2 overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
                             onKeyUp={(e) => setKey(e.currentTarget.value)}
                         ></textarea>
                     </div>
@@ -201,8 +212,8 @@ export default function Home() {
                             name="key"
                             id="key"
                             cols={60}
-                            rows={5}
-                            className="overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
+                            rows={1}
+                            className="p-2 overflow-y-auto font-medium text-[12px] rounded-lg bg-gray-700 text-white outline-none focus:ring-blue-600 ring-2 ring-opacity-50"
                             onKeyUp={(e) => setKeyB(e.currentTarget.value)}
                         ></textarea>
                     </div>)}

@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import clsx from 'clsx';
 
 interface NavbarProps {
     text?: string;
@@ -18,8 +17,6 @@ const Navbar: React.FC<NavbarProps> = ({text, onClick}) => {
                 <nav className="w-screen bg-white border-gray-200 px-2 sm:px-4 rounded dark:bg-gray-900">
                     <div className="container flex flex-wrap items-center justify-between mx-auto pt-0">
                         <a href="/" className="flex items-center">
-                            <img src="https://flowbite.com/docs/images/logo.svg" className="h-6 mr-3 sm:h-9"
-                                 alt="Flowbite Logo"/>
                             <span
                                 className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Kriptografi Tugas 1</span>
                         </a>
@@ -29,9 +26,9 @@ const Navbar: React.FC<NavbarProps> = ({text, onClick}) => {
                             <span className="sr-only">Open main menu</span>
                             <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                                  xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
+                                <path fillRule="evenodd"
                                       d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                      clip-rule="evenodd"></path>
+                                      clipRule="evenodd"></path>
                             </svg>
                         </button>
                         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
