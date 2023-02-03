@@ -3,6 +3,7 @@ import sympy as sym
 
 def hillEncrypt(plaintext, m, matrix, group):
   m = int(m)
+  plaintext = plaintext.replace(" ", "").upper()
 
   # add padding to plaintext
   if (len(plaintext) % m != 0):
@@ -13,15 +14,10 @@ def hillEncrypt(plaintext, m, matrix, group):
     for j in range(m):
       matrix[i][j] = int(matrix[i][j])
 
-  plaintext = plaintext.replace(" ", "").upper()
   ciphertext = ""
 
   if (m < 2):
     return "m must be greater than 1"
-
-  # check if m is valid
-  if (len(plaintext) % m != 0):
-    return "m is not valid"
 
   # check if matrix is valid
   if (len(matrix) != m):
