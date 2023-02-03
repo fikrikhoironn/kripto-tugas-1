@@ -37,13 +37,32 @@ export default function Home() {
         console.log("print");
     }
     const encrypt = () => {
-        // @ts-ignore
-        axios
-            .post(`http://127.0.0.1:5000/encrypt/${algorithms[selectedItem].endpoint}`, {
+        let obj;
+        if (selectedItem === 3) {
+            obj = {
                 plaintext: plainText,
                 key: key,
                 group: groupText,
-            }).then((res) => {
+                keyB: keyB,
+            }
+        } else if (selectedItem === 5) {
+            obj = {
+                plaintext: plainText,
+                key: key,
+                group: groupText,
+                matrix: matrix,
+            }
+        } else {
+            obj = {
+                plaintext: plainText,
+                key: key,
+                group: groupText,
+            }
+        }
+
+        // @ts-ignore
+        axios
+            .post(`http://127.0.0.1:5000/encrypt/${algorithms[selectedItem].endpoint}`,obj).then((res) => {
             console.log(res.data);
             setCipherText(res.data);
         });
